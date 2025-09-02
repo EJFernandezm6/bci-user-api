@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: bci-user-api
+  datasource:
+    url: jdbc:h2:mem:bci;MODE=LEGACY;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+app:
+  security:
+    jwt:
+      secret: ${JWT_SECRET:bci-secret-2cD6yJQ9wXfa7pQy4VbnmC3eM8rLkPzA}
+      expiration-minutes: 60
+  validation:
+    email-regex: '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.cl$'
+    password-regex: '^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$'
+
+spring.h2.console.enabled: true
+spring.h2.console.path: /h2-console
+
+logging.level.root: INFO
+logging.level.org.hibernate.SQL: DEBUG
+logging.level.org.springdoc: DEBUG
+logging.level.org.springframework.web: DEBUG
