@@ -110,3 +110,18 @@ java -jar target/bci-user-api-0.0.1-SNAPSHOT.jar
 - Tests del controller usan `@WebMvcTest` + `MockMvc`.  
 
 ---
+
+### Diagrama de secuencia de registro
+```mermaid
+---
+config:
+      theme: redux
+---
+flowchart TD
+        C[Cliente] -->|POST /api/v1/users| API[UserController]
+        API --> SVC[UserService]
+        SVC -->|existsByEmail| Repo[UserRepository]
+        SVC -->|JWT| Jwt[JwtService]
+        SVC -->|save| Repo
+        SVC -->|findByEmail| Repo
+        Repo --> DB[(H2 + JPA)]
